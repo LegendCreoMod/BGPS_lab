@@ -57,8 +57,17 @@ CREATE TABLE mark
     PRIMARY KEY (id)
 );
 
+CREATE TABLE student_local
+(
+    id INT AUTO_INCREMENT NOT NULL,
+    study_group_id INT NOT NULL,
+    surname TEXT NULL,
+    name TEXT NULL,
+    second_name TEXT NULL
+);
+
 ALTER TABLE journal
-    ADD CONSTRAINT R_1 FOREIGN KEY (journal_id) REFERENCES student (id);
+    ADD CONSTRAINT R_1 FOREIGN KEY (student_id) REFERENCES student (id);
 
 ALTER TABLE journal
     ADD CONSTRAINT R_2 FOREIGN KEY (mark_id) REFERENCES mark (id);
@@ -74,6 +83,9 @@ ALTER TABLE study_plan
 
 ALTER TABLE study_plan
     ADD CONSTRAINT R_6 FOREIGN KEY (exam_type_id) REFERENCES exam_type (id);
+
+ALTER TABLE student_local
+    ADD CONSTRAINT R_7 FOREIGN KEY (study_group_id) REFERENCES study_group (id);
 
 INSERT INTO subject (id, name, short_name) VALUES
 (1, 'Проектирование информационных систем', 'ПрИС'),
@@ -108,3 +120,9 @@ INSERT INTO mark (id, name, value) VALUES
 (5, 'Зачет', 'з'),
 (6, 'Незачет', 'н'),
 (7, 'Неявка', '');
+
+INSERT INTO study_group (id, name)
+VALUES (1, 'ИКБО-02-16');
+
+INSERT INTO student_local (id, study_group_id, surname, name, second_name)
+VALUES (2306, 1, 'Ларин', 'Антон', 'Владимирович');
